@@ -139,6 +139,65 @@
                 </div>
             </section>
 
+            <section id="purchases" class="page">
+                <h2 class="page-title">المشتريات</h2>
+                
+                <div class="glass-card mt-1" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h3>مجموع المشتريات: <span id="totalPurchasesValue" class="text-danger">0 د.ع</span></h3>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <span style="color: white; font-size: 0.9rem;">من:</span>
+                        <input type="date" id="filterPurchaseFrom" style="padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.25); color: #fff; outline: none;">
+                        <span style="color: white; font-size: 0.9rem;">إلى:</span>
+                        <input type="date" id="filterPurchaseTo" style="padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.25); color: #fff; outline: none;">
+                        <button class="btn-primary" onclick="app.filterPurchases()">فهرسه</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                    <button class="btn-success" onclick="app.showAddPurchaseForm()">اضافة عملية شرا جديده <i class="fa-solid fa-plus"></i></button>
+                    <button class="btn-danger" onclick="app.clearPurchases()">تصفير المشتريات <i class="fa-solid fa-trash-can"></i></button>
+                </div>
+
+                <div id="addPurchaseFormContainer" class="glass-card form-container hidden mt-2">
+                    <form id="purchaseForm">
+                        <input type="hidden" id="purchaseEditId" value="">
+                        <div class="input-group">
+                            <i class="fa-solid fa-clock"></i>
+                            <input type="text" id="purchaseDateTime" readonly required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-pen"></i>
+                            <input type="text" id="purchaseNotes" placeholder="ملاحضات او الشي الذي اشترا مثلا اكلنس" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-money-bill"></i>
+                            <input type="number" step="any" id="purchasePrice" placeholder="السعر" required>
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button type="submit" class="btn-primary">حفظ <i class="fa-solid fa-save"></i></button>
+                            <button type="button" class="btn-danger" onclick="app.hideAddPurchaseForm()">إلغاء</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive glass-card mt-2">
+                    <table id="purchasesTable">
+                        <thead>
+                            <tr>
+                                <th>التاريخ والوقت</th>
+                                <th>الملاحظات</th>
+                                <th>السعر</th>
+                                <th>إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="purchasesTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
             <section id="settings" class="page">
                 <h2 class="page-title">إعدادات النظام</h2>
                 <div class="glass-card settings-card">
@@ -178,6 +237,10 @@
             <a href="#" class="nav-item" data-target="finance">
                 <i class="fa-solid fa-wallet"></i>
                 <span>المالية</span>
+            </a>
+            <a href="#" class="nav-item" data-target="purchases">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>المشتريات</span>
             </a>
             <a href="#" class="nav-item" data-target="settings">
                 <i class="fa-solid fa-gear"></i>
