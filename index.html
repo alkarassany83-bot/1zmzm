@@ -142,42 +142,48 @@
             <section id="purchases" class="page">
                 <h2 class="page-title">المشتريات</h2>
                 
+                <div class="tabs glass-card" id="purchaseCategories" style="flex-wrap: wrap; gap: 5px; margin-bottom: 1rem;">
+                    <button class="tab-btn active" onclick="app.selectPurchaseCategory('حصة طبيبه', this)">حصة طبيبه</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('حصة سونار', this)">حصة سونار</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('حصةعمل طبيبه', this)">حصةعمل طبيبه</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('اجرة نقل طبيبه', this)">اجرة نقل طبيبه</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('اجرة نقل طبيبة أسنان', this)">اجرة نقل طبيبة أسنان</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('صيانة', this)">صيانة</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('رصيد', this)">رصيد</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('ضيافه', this)">ضيافه</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('كلينكس', this)">كلينكس</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('ماء كاسات', this)">ماء كاسات</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('اجرة نقل صيدليه', this)">اجرة نقل صيدليه</button>
+                    <button class="tab-btn" onclick="app.selectPurchaseCategory('اخرى', this)">اخرى</button>
+                </div>
+
                 <div class="glass-card mt-1" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                     <div>
-                        <h3>مجموع المشتريات: <span id="totalPurchasesValue" class="text-danger">0 د.ع</span></h3>
+                        <h3>مجموع المشتريات (<span id="currentPurchaseCategoryLabel">حصة طبيبه</span>): <span id="totalPurchasesValue" class="text-danger">0 د.ع</span></h3>
                     </div>
                     <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                        <span style="color: white; font-size: 0.9rem;">من:</span>
-                        <input type="date" id="filterPurchaseFrom" style="padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.25); color: #fff; outline: none;">
-                        <span style="color: white; font-size: 0.9rem;">إلى:</span>
-                        <input type="date" id="filterPurchaseTo" style="padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.25); color: #fff; outline: none;">
-                        <button class="btn-primary" onclick="app.filterPurchases()">فهرسه</button>
+                        <button class="btn-danger" onclick="app.clearPurchasesByCategory()">تصفير <i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                    <button class="btn-success" onclick="app.showAddPurchaseForm()">اضافة عملية شرا جديده <i class="fa-solid fa-plus"></i></button>
-                    <button class="btn-danger" onclick="app.clearPurchases()">تصفير المشتريات <i class="fa-solid fa-trash-can"></i></button>
-                </div>
-
-                <div id="addPurchaseFormContainer" class="glass-card form-container hidden mt-2">
+                <div id="addPurchaseFormContainer" class="glass-card form-container mt-2">
                     <form id="purchaseForm">
                         <input type="hidden" id="purchaseEditId" value="">
-                        <div class="input-group">
-                            <i class="fa-solid fa-clock"></i>
-                            <input type="text" id="purchaseDateTime" readonly required>
-                        </div>
-                        <div class="input-group">
-                            <i class="fa-solid fa-pen"></i>
-                            <input type="text" id="purchaseNotes" placeholder="ملاحضات او الشي الذي اشترا مثلا اكلنس" required>
-                        </div>
+                        <input type="hidden" id="purchaseCategory" value="حصة طبيبه">
                         <div class="input-group">
                             <i class="fa-solid fa-money-bill"></i>
                             <input type="number" step="any" id="purchasePrice" placeholder="السعر" required>
                         </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-pen"></i>
+                            <input type="text" id="purchaseNotes" placeholder="ملاحضات" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-clock"></i>
+                            <input type="text" id="purchaseDateTime" readonly required>
+                        </div>
                         <div style="display: flex; gap: 10px; margin-top: 15px;">
                             <button type="submit" class="btn-primary">حفظ <i class="fa-solid fa-save"></i></button>
-                            <button type="button" class="btn-danger" onclick="app.hideAddPurchaseForm()">إلغاء</button>
                         </div>
                     </form>
                 </div>
